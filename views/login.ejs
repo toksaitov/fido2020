@@ -10,7 +10,12 @@
         <h1>FidoNet2020</h1>
     </header>
     <main>
-        <!-- TODO: Add error banner -->
+        <% if (session.error) { %>
+            <section class="error">
+                <%= session.error %>
+                <% delete session.error; %>
+            </section>
+        <% } %>
         <form action="/login" method="POST">
             <label>
                 Login:<br>

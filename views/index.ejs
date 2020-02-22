@@ -9,9 +9,17 @@
     <header>
         <h1>FidoNet2020</h1>
         <ul class="user-toolbar">
-            <li><a href="/login">Login</a></li>
-            <li><a href="/register">Register</a></li>
-            <!-- TODO: Add logout button. -->
+            <% if (session.authorized) { %>
+                <li>@<%= session.login %></li>
+                <li>
+                    <form action="/logout" method="POST">
+                        <input type="submit" value="Logout">
+                    </form>
+                </li>
+            <% } else { %>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+            <% } %>
         </ul>
     </header>
     <main>
