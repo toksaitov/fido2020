@@ -23,9 +23,33 @@
         </ul>
     </header>
     <main>
-        <!-- TODO: Add message form. -->
+        <% if (session.error) { %>
+            <section class="error">
+                <%= session.error %>
+                <% delete session.error; %>
+            </section>
+        <% } %>
+        <% if (session.authorized) { %>
+            <form action="/message/create" method="POST">
+                <label>
+                    What’s on your mind?<br>
+                    <input type="text" name="content">
+                </label>
+                <input type="submit" value="Send">
+            </form>
+        <% } %>
         <ul class="messages">
-            <li class="message">No messages...</li>
+            <% if (messages.length === 0) { %>
+                <li class="message">No messages...</li>
+            <% } else { %>
+                <% for (const message of messages) { %>
+                    <li class="message">
+                        <p>@<%= message.user.login %></p>
+                        <p><%= message.content %></p>
+                        <time><%= moment(message.createdAt).format('LLL') %></time>
+                    </li>
+                <% } %>
+            <% } %>
         </ul>
     </main>
     <footer>
