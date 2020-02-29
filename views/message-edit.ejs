@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Project Fido2020</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>FidoNet2020</h1>
+    </header>
+    <main>
+        <% if (session.error) { %>
+            <section class="error">
+                <%= session.error %>
+                <% delete session.error; %>
+            </section>
+        <% } %>
+        <% if (session.authorized) { %>
+            <form action="/message/<%= message.id %>/edit" method="POST">
+                <label>
+                    Edit your message<br>
+                    <input type="text" name="content" value="<%= message.content %>">
+                </label>
+                <input type="submit" value="Update">
+            </form>
+        <% } %>
+    </main>
+    <footer>
+        &copy; 2020
+    </footer>
+</body>
+</html>

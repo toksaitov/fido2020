@@ -47,6 +47,15 @@
                         <p>@<%= message.user.login %></p>
                         <p><%= message.content %></p>
                         <time><%= moment(message.createdAt).format('LLL') %></time>
+                        <% if (session.administrator || session.userID === message.user.id) { %>
+                            <!-- <a href="/message/<%= message.id %>/edit">Edit</a> -->
+                            <form action="/message/<%= message.id %>/edit" method="GET">
+                                <input type="submit" value="Edit">
+                            </form>
+                            <form action="/message/<%= message.id %>/delete" method="POST">
+                                <input type="submit" value="Delete">
+                            </form>
+                        <% } %>
                     </li>
                 <% } %>
             <% } %>
