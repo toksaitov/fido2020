@@ -1,0 +1,25 @@
+version: "2"
+
+services:
+    fido2020:
+        build: "."
+        image: "toksaitov/fido2020"
+        ports:
+            - "80:8080"
+        env_file: ".env"
+        depends_on:
+            - "fido2020-db"
+            - "fido2020-session-db"
+
+    fido2020-db:
+        image: "mysql:5.7.29"
+        command: "--character-set-server=utf8 --collation-server=utf8_general_ci"
+        environment:
+            MYSQL_ROOT_PASSWORD: "${DB_PASS}"
+            MYSQL_DATABASE: "${DB_NAME}"
+            MYSQL_USER: "${DB_USER}"
+            MYSQL_PASSWORD: "${DB_PASS}"
+
+    fido2020-session-db:
+        image: "redis:5.0.8"
+

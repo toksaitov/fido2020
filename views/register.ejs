@@ -1,40 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Project Fido2020, Registration</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <h1>FidoNet2020</h1>
-    </header>
-    <main>
-        <% if (session.error) { %>
-            <section class="error">
-                <%= session.error %>
-                <% delete session.error; %>
-            </section>
-        <% } %>
-        <form action="/register" method="POST">
-            <label>
-                Login:<br>
-                <input type="text" name="login">
-            </label><br>
-            <label>
-                Password:<br>
-                <input type="password" name="password">
-            </label><br>
-            <label>
-                Repeat Password:<br>
-                <input type="password" name="password-repeat">
-            </label><br>
-            <input type="submit" value="Register">
-        </form>
-    </main>
-    <footer>
-        &copy; 2020
-    </footer>
-    <!-- TODO: Add scripts to check for correctly repeated passwords -->
-</body>
+    <head>
+        <%- include('partials/utilities/head', { 'title': 'Fido2020: Register' }) %>
+    </head>
+    <body>
+        <%- include('partials/header', { 'showUserToolbar': false }) %>
+        <main class="container">
+            <%- include('partials/error') %>
+            <%- include('partials/registerForm') %>
+        </main>
+        <%- include('partials/footer') %>
+    </body>
 </html>

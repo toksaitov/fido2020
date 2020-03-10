@@ -1,0 +1,6 @@
+version: "2"
+
+services:
+    fido2020:
+        volumes:
+            - ".:/fido2020"

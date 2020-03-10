@@ -1,68 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Project Fido2020</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <h1>FidoNet2020</h1>
-        <ul class="user-toolbar">
-            <% if (session.authorized) { %>
-                <li>@<%= session.login %></li>
-                <li>
-                    <form action="/logout" method="POST">
-                        <input type="submit" value="Logout">
-                    </form>
-                </li>
-            <% } else { %>
-                <li><a href="/login">Login</a></li>
-                <li><a href="/register">Register</a></li>
-            <% } %>
-        </ul>
-    </header>
-    <main>
-        <% if (session.error) { %>
-            <section class="error">
-                <%= session.error %>
-                <% delete session.error; %>
-            </section>
-        <% } %>
-        <% if (session.authorized) { %>
-            <form action="/message/create" method="POST">
-                <label>
-                    What’s on your mind?<br>
-                    <input type="text" name="content">
-                </label>
-                <input type="submit" value="Send">
-            </form>
-        <% } %>
-        <ul class="messages">
-            <% if (messages.length === 0) { %>
-                <li class="message">No messages...</li>
-            <% } else { %>
-                <% for (const message of messages) { %>
-                    <li class="message">
-                        <p>@<%= message.user.login %></p>
-                        <p><%= message.content %></p>
-                        <time><%= moment(message.createdAt).format('LLL') %></time>
-                        <% if (session.administrator || session.userID === message.user.id) { %>
-                            <!-- <a href="/message/<%= message.id %>/edit">Edit</a> -->
-                            <form action="/message/<%= message.id %>/edit" method="GET">
-                                <input type="submit" value="Edit">
-                            </form>
-                            <form action="/message/<%= message.id %>/delete" method="POST">
-                                <input type="submit" value="Delete">
-                            </form>
-                        <% } %>
-                    </li>
-                <% } %>
-            <% } %>
-        </ul>
-    </main>
-    <footer>
-        &copy; 2020
-    </footer>
-</body>
+    <head>
+        <%- include('partials/utilities/head', { 'title': 'Fido2020' }) %>
+    </head>
+    <body>
+        <%- include('partials/header', { 'showUserToolbar': true }) %>
+        <main class="container">
+            <%- include('partials/error') %>
+            <%- include('partials/messageForm') %>
+            <%- include('partials/messages') %>
+        </main>
+        <%- include('partials/footer') %>
+    </body>
 </html>
