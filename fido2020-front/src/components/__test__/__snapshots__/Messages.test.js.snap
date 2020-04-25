@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches the previous snapshot 1`] = `
+<div
+  className="row my-3"
+>
+  <div
+    className="col-md-4"
+  >
+    <div
+      className="message card p-3 m-2 text-white bg-secondary"
+    >
+      <h5
+        className="card-title"
+      >
+        @
+        admin
+      </h5>
+      <div>
+        <div
+          className="message-content card-text"
+        >
+          hello
+        </div>
+      </div>
+      <time
+        className="message-date card-subtitle"
+      >
+        <small>
+          <time
+            dateTime={"2020-05-24T14:01:41.000Z"}
+          >
+            May 24, 2020 10:01 AM
+          </time>
+        </small>
+      </time>
+    </div>
+  </div>
+</div>
+`;
