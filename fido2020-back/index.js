@@ -12,7 +12,7 @@ users(parameters, server, database);
 import messages from './lib/messages.js'
 messages(parameters, server, database);
 
-server.get('/', (request, response) => {
+server.get(['/', '/messages'], (request, response) => {
     const Message = database.models.Message;
     const User = database.models.User;
     Message.findAll({
@@ -20,7 +20,26 @@ server.get('/', (request, response) => {
             'model': User
         }]
     }).then(messages => {
-        response.render('index', { messages, 'session': request.session, 'message': null });
+        response.format({
+            'text/html': () => {
+                response.render('index', { messages, 'session': request.session, 'message': null });
+            },
+            'application/json': () => {
+                const data = messages.map(message => {
+                    return {
+                        'id': message.id,
+                        'content': message.content,
+                        'createdAt': message.createdAt,
+                        'updatedAt': message.updatedAt,
+                        'user': {
+                            'id': message.user.id,
+                            'login': message.user.login
+                        }
+                    }
+                });
+                response.json(data);
+            }
+        });
     }).catch(error => {
         console.error(error);
         response.status(503).end('Service Unavailable');

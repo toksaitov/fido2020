@@ -7,6 +7,7 @@ Project codenamed __fidonet2020__ is a simple Twitter clone.
 
 * Node.js (>= 13) with npm or yarn
 * MySQL (>= 5.7)
+* Redis (>= 5.0.8)
 
 ## Deployment Manually
 
@@ -39,6 +40,11 @@ Download libraries with `npm install` and start the server with `npm start`.
 1. Install Docker and Docker Compose.
 2. Create an `.env` file as described in 'Manual Deployment'.
 3. Start the database container and the fidonet2020 container with `docker-compose up`.
+4. For development environments to be able to modify files while the container
+   is running, start the system with `docker-compose -f docker-compose.yml -f docker-compose.development.yml up`.
+   Ensure to run `npm install` locally before starting the development containers.
+   Ensure that the installed modules are compatible with the current Docker
+   platform.
 
 ## Credits
 
