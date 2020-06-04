@@ -3,7 +3,7 @@ import React from 'react';
 const Footer = () =>
     <footer>
         <nav className="navbar navbar-light bg-light">
-            <p className="mx-auto mt-3">&copy; 2020</p>
+            <p className="mx-auto mt-3">&copy; 2021</p>
         </nav>
     </footer>;
 
